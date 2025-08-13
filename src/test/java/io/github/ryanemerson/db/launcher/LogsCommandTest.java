@@ -18,9 +18,22 @@ class LogsCommandTest {
         LogsCommand logsCommand = new LogsCommand();
         logsCommand.vendor = new PostgresVendor();
         logsCommand.dockerService = dockerService;
+        logsCommand.follow = false;
 
         logsCommand.run();
 
-        verify(dockerService).logsContainer(logsCommand.vendor);
+        verify(dockerService).logsContainer(logsCommand.vendor, false);
+    }
+
+    @Test
+    void testRunFollow() {
+        LogsCommand logsCommand = new LogsCommand();
+        logsCommand.vendor = new PostgresVendor();
+        logsCommand.dockerService = dockerService;
+        logsCommand.follow = true;
+
+        logsCommand.run();
+
+        verify(dockerService).logsContainer(logsCommand.vendor, true);
     }
 }

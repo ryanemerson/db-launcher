@@ -72,13 +72,14 @@ public class DockerService {
         }
     }
 
-    public void logsContainer(DatabaseVendor vendor) {
+    public void logsContainer(DatabaseVendor vendor, boolean follow) {
         String containerName = vendor.getContainerName();
         Container container = getContainer(containerName);
         if (container != null) {
             LogContainerCmd logContainerCmd = dockerClient.logContainerCmd(container.getId())
                     .withStdOut(true)
-                    .withStdErr(true);
+                    .withStdErr(true)
+                    .withFollowStream(follow);
             try {
                 logContainerCmd.exec(new LogContainerResultCallback() {
                     @Override

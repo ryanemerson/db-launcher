@@ -38,12 +38,16 @@ Stops and removes a running database container.
 Fetches and displays the logs of a running database container.
 
 ```shell
-./db logs <vendor>
+./db logs <vendor> [options]
 ```
 
 **Example:**
 ```shell
+# Show the logs for a Postgres container
 ./db logs postgres
+
+# Follow the logs for a Postgres container
+./db logs postgres --follow
 ```
 
 ### `list`
